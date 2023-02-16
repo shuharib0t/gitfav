@@ -18,16 +18,18 @@ export class Favorites {
   
   async add(username) {
     try {
-      const userExists = this.entries.find(entry => entry.login === username)
-
+      const userExists = this.entries
+        .map(entry => entry.login.toLowerCase())
+        .find(entry => entry === username.toLowerCase())
+        
       if(userExists) {
-        throw new Error('Usuário já cadastrado.')
+        throw new Error('User already exists')
       }
 
       const user = await GithubUser.search(username)
 
       if(user.login === undefined) {
-        throw new Error('Usuário não encontrado!')
+        throw new Error('User not found')
       }
 
       this.entries = [user, ...this.entries]
@@ -61,16 +63,39 @@ export class FavoritesView extends Favorites {
     this.onadd()
   }
 
+  emptyState() {
+    const removeHide = this.root.querySelector('.empty-state')
+    const addHide = this.root.querySelector('.empty-state')
+
+    if (this.entries.length === 0) {
+      removeHide.classList.remove('hide')
+    } else {
+      addHide.classList.add('hide')
+    }
+  }
+
   onadd() {
     const addButton = this.root.querySelector('.search button')
+
+    window.document.onkeyup = event => {
+      if(event.key === "Enter"){ 
+        const { value } = this.root.querySelector('.search input')
+        
+        this.add(value)
+        value = this.root.querySelector('.search input').value = ''
+      }
+    }
+
     addButton.onclick = () => {
       const { value } = this.root.querySelector('.search input')
 
       this.add(value)
+      value = this.root.querySelector('.search input').value = ''
     }
   }
 
   update() {
+    this.emptyState()
     this.removeAllTr()
 
     this.entries.forEach( user => {
@@ -80,12 +105,12 @@ export class FavoritesView extends Favorites {
       row.querySelector('.user img').alt = `Imagem de ${user.name}`
       row.querySelector('.user a').href = `https://github.com/${user.login}`
       row.querySelector('.user p').textContent = user.name
-      row.querySelector('.user span').textContent = user.login
+      row.querySelector('.user span').textContent = `/${user.login}`
       row.querySelector('.repositories').textContent = user.public_repos
       row.querySelector('.followers').textContent = user.followers
 
       row.querySelector('.remove').onclick = () => {
-        const isOk = confirm('Tem certeza que deseja deletar essa linha?')
+        const isOk = confirm('Are you sure?')
         if (isOk) {
           this.delete(user)
         }
@@ -100,20 +125,16 @@ export class FavoritesView extends Favorites {
 
     tr.innerHTML = `
       <td class="user">
-        <img src="https://github.com/maykbrito.png" alt="Imagem de maykbrito">
-        <a href="https://github.com/maykbrito" target="_blank">
-          <p>Mayk Brito</p>
-          <span>/maykbrito</span>
+        <img src="" alt="">
+        <a href="" target="_blank">
+          <p></p>
+          <span></span>
         </a>
       </td>
-      <td class="repositories">
-        76
-      </td>
-      <td class="followers">
-        9589
-      </td>
+      <td class="repositories"></td>
+      <td class="followers"></td>
       <td>
-        <button class="remove">Remover</button>
+        <button class="remove">Remove</button>
       </td>
     `
     
