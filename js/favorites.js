@@ -79,7 +79,7 @@ export class FavoritesView extends Favorites {
 
     window.document.onkeyup = event => {
       if(event.key === "Enter"){ 
-        const { value } = this.root.querySelector('.search input')
+        let { value } = this.root.querySelector('.search input')
         
         this.add(value)
         value = this.root.querySelector('.search input').value = ''
@@ -87,7 +87,7 @@ export class FavoritesView extends Favorites {
     }
 
     addButton.onclick = () => {
-      const { value } = this.root.querySelector('.search input')
+      let { value } = this.root.querySelector('.search input')
 
       this.add(value)
       value = this.root.querySelector('.search input').value = ''
