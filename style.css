@@ -207,6 +207,12 @@ td.user img {
 
 td.user a {
   text-decoration: none;
+  transition: all .3s;
+}
+
+td.user a:hover {
+  color: hsl(0, 0%, 65%);
+  transition: all .3s;
 }
 
 td.user a p,
