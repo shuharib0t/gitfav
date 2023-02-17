@@ -1,6 +1,4 @@
-Bem vindo ao GitFav
-O Projeto foi feito com HTML, CSS, JavaScript e consome a API do GitHub para pegar os perfis que estão lá.
-Nele temos as funções de: 
+Bem vindo ao GitFav,o projeto foi feito com HTML, CSS, JavaScript e consome a API do GitHub para pegar os perfis que estão lá. Nele temos as funções de: 
 - Botão 'Favorite' para salvar o usuário
 - Botão 'Remove' para deletar o usuário
 - Salvar usuário pela tecla 'Enter' (Deletar também se você apertar o botão 'Remove')
