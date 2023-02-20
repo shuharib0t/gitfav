@@ -148,6 +148,10 @@ header h1 {
   background-clip: padding-box;
 }
 
+.wrapper::-webkit-scrollbar-track {
+  margin-block-start: 5rem; 
+}
+
 .wrapper::-webkit-scrollbar-thumb:active {
   background-color: var(--scroll-active-color);
 }
