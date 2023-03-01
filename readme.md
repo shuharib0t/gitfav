@@ -6,3 +6,5 @@ Bem vindo ao GitFav,o projeto foi feito com HTML, CSS, JavaScript e consome a AP
 - Barra de scroll caso a lista ultrapasse o limite da tabela
 
 OBS: você não pode repetir um usuário que já está na tabela, nem buscar um usuário inexistente. Caso alguma dessas situações aconteça aparecerá um aviso.
+
+aaaa
